@@ -1,3 +1,9 @@
+#### [0.0.4] - 2024-06-08
+
+- Updated baseEntity
+- Updated TMemberEntity
+- Added TReservationDto
+
 #### [0.0.3] - 2024-06-07
 
 - Added entities for educational and recreational facilities part 1

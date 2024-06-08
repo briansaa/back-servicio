@@ -3,7 +3,6 @@ package com.saditec.platform.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 
@@ -16,6 +15,9 @@ public class TBaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(columnDefinition = "VARCHAR(36)")
     private String identifier;
+
+    @Column(name = "b_enabled", columnDefinition = "BIT(1) DEFAULT TRUE")
+    private Boolean enabled;
 
     @Column(name = "t_created_by")
     private String createdBy;
