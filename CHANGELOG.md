@@ -1,3 +1,12 @@
+#### [1.0.4] - 2024-06-08
+
+- Added support security part 1
+- Added custom UserDetails
+- Added custom UserDetailsService
+- Added custom AuthenticationProvider
+- Updated TMemberEntity
+- Updated TBaseEntity
+
 #### [0.0.4] - 2024-06-08
 
 - Updated baseEntity

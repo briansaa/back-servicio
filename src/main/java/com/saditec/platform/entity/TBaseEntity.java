@@ -16,8 +16,8 @@ public class TBaseEntity {
     @Column(columnDefinition = "VARCHAR(36)")
     private String identifier;
 
-    @Column(name = "b_enabled", columnDefinition = "BIT(1) DEFAULT TRUE")
-    private Boolean enabled;
+    @Column(name = "b_enabled", columnDefinition = "BIT(1) DEFAULT TRUE", nullable = false)
+    private Boolean enabled = true;
 
     @Column(name = "t_created_by")
     private String createdBy;

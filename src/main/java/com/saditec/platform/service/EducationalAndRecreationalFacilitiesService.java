@@ -1,7 +1,7 @@
 package com.saditec.platform.service;
 
 import com.saditec.platform.entity.TEducationalAndRecreationalFacilityEntity;
-import com.saditec.platform.repository.EducationalAndRecreationalFacilitiesRepository;
+import com.saditec.platform.repository.IEducationalAndRecreationalFacilitiesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class EducationalAndRecreationalFacilitiesService {
 
-    private final EducationalAndRecreationalFacilitiesRepository educationalAndRecreationalFacilitiesRepository;
+    private final IEducationalAndRecreationalFacilitiesRepository educationalAndRecreationalFacilitiesRepository;
 
     @Transactional
     public TEducationalAndRecreationalFacilityEntity add(){
