@@ -1,3 +1,8 @@
+#### [1.1.4] - 2024-06-11
+
+- Added support security + JWT 
+- Added filters with jwt validation
+
 #### [1.0.4] - 2024-06-08
 
 - Added support security part 1

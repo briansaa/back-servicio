@@ -1,7 +1,6 @@
 package com.saditec.platform.controller;
 
-import com.saditec.platform.security.auth.service.TUserService;
-import com.saditec.platform.service.TMemberService;
+import com.saditec.platform.service.MemberService;
 import com.saditec.platform.type.ApiResponse;
 import com.saditec.platform.type.TMemberDto;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TMemberController {
 
-    private final TMemberService memberService;
+    private final MemberService memberService;
 
     @PostMapping("/register")
     public ApiResponse<TMemberDto> registerMember(@RequestBody TMemberDto memberDto) {

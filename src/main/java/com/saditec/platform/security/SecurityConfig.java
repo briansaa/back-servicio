@@ -1,6 +1,9 @@
 package com.saditec.platform.security;
 
+import com.saditec.platform.security.filter.CustomAuthenticationFilter;
 import com.saditec.platform.security.auth.service.TUserService;
+import com.saditec.platform.security.filter.JSONWebTokenAuthenticationFilter;
+import com.saditec.platform.security.jwt.JWTService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +20,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,6 +29,8 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final TUserService tUserService;
+    private final JWTService jwtService;
+    private final JSONWebTokenAuthenticationFilter jsonWebTokenAuthenticationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -46,7 +52,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager) throws Exception {
+
         return httpSecurity
                 .cors(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -63,8 +70,9 @@ public class SecurityConfig {
                                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
-//                .addFilter(new JSONWebTokenAuthenticationFilter(authenticationManager()))
+                .addFilterAt(new CustomAuthenticationFilter(authenticationManager, jwtService), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jsonWebTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout(Customizer.withDefaults())
                 .build();
     }
-
 }

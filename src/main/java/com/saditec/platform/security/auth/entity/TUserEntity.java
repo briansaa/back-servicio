@@ -1,8 +1,8 @@
 package com.saditec.platform.security.auth.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.saditec.platform.entity.TBaseEntity;
 import com.saditec.platform.security.auth.reference.EPermissionReference;
-import com.saditec.platform.type.TMemberDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +14,6 @@ import java.util.*;
 import java.util.stream.Stream;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "t_member")
 public class TUserEntity extends TBaseEntity implements UserDetails {
 
@@ -25,6 +23,7 @@ public class TUserEntity extends TBaseEntity implements UserDetails {
     @Column(name = "t_code", columnDefinition = "VARCHAR(10)", unique = true, nullable = false)
     private String code;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "t_password", nullable = false)
     private String password;
 
@@ -37,7 +36,7 @@ public class TUserEntity extends TBaseEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        List<String> _roles = this.getRoles().stream().map(TRoleEntity::getAuthority).toList();
+        List<String> _roles = roles.stream().map(TRoleEntity::getAuthority).toList();
         List<String> _permissions = Arrays.stream(EPermissionReference.values())
                 .flatMap(ePermissionReference -> _roles.contains(ePermissionReference.name())
                         ? ePermissionReference.getPermissions().stream()
