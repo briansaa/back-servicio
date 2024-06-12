@@ -59,8 +59,7 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(
-                        sessionManagementConfigurer ->
-                                sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        sessionManagementConfigurer -> sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(
                         requestMatcherRegistry ->
@@ -71,7 +70,7 @@ public class SecurityConfig {
                 )
                 .httpBasic(Customizer.withDefaults())
                 .addFilterAt(new CustomAuthenticationFilter(authenticationManager, jwtService), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(jsonWebTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(jsonWebTokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(Customizer.withDefaults())
                 .build();
     }
