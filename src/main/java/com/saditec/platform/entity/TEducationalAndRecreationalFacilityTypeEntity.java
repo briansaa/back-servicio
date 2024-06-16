@@ -21,10 +21,10 @@ public class TEducationalAndRecreationalFacilityTypeEntity extends TBaseEntity {
     @Column(name = "t_description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "t_image_admin", columnDefinition = "TEXT")
+    @Column(name = "t_image_admin", columnDefinition = "LONGTEXT")
     private String image;
 
-    @Column(name = "t_image_public", columnDefinition = "TEXT")
+    @Column(name = "t_image_public", columnDefinition = "LONGTEXT")
     private String imagePublic;
 
     @OneToMany(mappedBy = "type")
