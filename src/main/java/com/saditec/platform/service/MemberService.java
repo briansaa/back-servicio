@@ -4,6 +4,7 @@ import com.saditec.platform.entity.TMemberEntity;
 import com.saditec.platform.error.BadRequestException;
 import com.saditec.platform.repository.IMemberRepository;
 import com.saditec.platform.security.auth.entity.TRoleEntity;
+import com.saditec.platform.security.auth.reference.EPermissionReference;
 import com.saditec.platform.security.auth.repository.IRoleRepository;
 import com.saditec.platform.type.TMemberDto;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,7 @@ public class MemberService {
     public TMemberDto registerUser(TMemberDto tMemberDto) {
 
         List<TRoleEntity> roles = roleRepository.findByDescriptionIsIn(tMemberDto.getRoles());
+        roles = roles.isEmpty() ? roleRepository.findByDescriptionIsIn(List.of(EPermissionReference.USER_ROLE.name())) : roles;
 
         if (roles.isEmpty()) throw new BadRequestException("No roles found");
 

@@ -1,3 +1,8 @@
+#### [1.1.5] - 2024-06-15
+- Updated JWTService
+- Updated response after login
+- Added CREATE AND GET Educational and Recreational Facilities Type
+
 #### [1.1.4] - 2024-06-11
 
 - Added support security + JWT 

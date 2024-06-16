@@ -36,7 +36,7 @@ public class JWTService {
                 .claim("authorities", authorities)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + (expirationTime * 60000)))
+                .expiration(new Date(System.currentTimeMillis() + expirationTime()))
                 .signWith(getSigningKey())
                 .compact();
     }

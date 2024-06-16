@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Base64;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -53,7 +55,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         response.setStatus(HttpServletResponse.SC_OK);
 
         String accessToken = jwtService.generateToken(userEntity.getAuthorities(), userEntity);
-        long expirationTime = jwtService.expirationTime();
+        long expirationTime = new Date().getTime() + jwtService.expirationTime();
 
         UserResponseToken userResponseToken = new UserResponseToken(accessToken, expirationTime, "Bearer");
         String responseToken = objectMapper.writeValueAsString(userResponseToken);
