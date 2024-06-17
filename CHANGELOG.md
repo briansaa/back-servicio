@@ -1,3 +1,7 @@
+#### [1.1.6] - 2024-06-17
+- Updated JWTService, reference subject
+- Added entity TEducationalAndRecreationalPavilion
+
 #### [1.1.5] - 2024-06-15
 - Updated JWTService
 - Updated response after login

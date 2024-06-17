@@ -1,6 +1,7 @@
 package com.saditec.platform.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saditec.platform.security.auth.entity.TUserEntity;
 import com.saditec.platform.security.jwt.JWTService;
 import com.saditec.platform.security.jwt.type.UserResponseToken;
 import jakarta.servlet.FilterChain;
@@ -12,11 +13,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Base64;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -51,7 +50,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
-        UserDetails userEntity = (UserDetails) authResult.getPrincipal();
+        TUserEntity userEntity = (TUserEntity) authResult.getPrincipal();
         response.setStatus(HttpServletResponse.SC_OK);
 
         String accessToken = jwtService.generateToken(userEntity.getAuthorities(), userEntity);

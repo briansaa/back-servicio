@@ -24,4 +24,12 @@ public class TEducationalAndRecreationalFacilityEntity extends TBaseEntity {
 
     @ManyToMany(mappedBy = "educationalAndRecreationalFacilityEntities")
     private Set<TReservationHourEntity> tReservationEntities;
+
+    @ManyToMany
+    @JoinTable(
+            name = "t_educational_and_recreational_facility_and_t_recreational_pavilion",
+            joinColumns = @JoinColumn(name = "t_educational_and_recreational_facility_identifier"),
+            inverseJoinColumns = @JoinColumn(name = "t_recreational_pavilion_identifier")
+    )
+    private Set<TEducationalAndRecreationalPavilionEntity> recreationalPavilions;
 }

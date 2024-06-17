@@ -1,6 +1,7 @@
 package com.saditec.platform.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.saditec.platform.security.auth.entity.TUserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -9,7 +10,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -31,10 +31,10 @@ public class JWTService {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public String generateToken(Collection<? extends GrantedAuthority> authorities, UserDetails userDetails) {
+    public String generateToken(Collection<? extends GrantedAuthority> authorities, TUserEntity userDetails) {
         return Jwts.builder()
                 .claim("authorities", authorities)
-                .subject(userDetails.getUsername())
+                .subject(userDetails.getIdentifier())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expirationTime()))
                 .signWith(getSigningKey())
