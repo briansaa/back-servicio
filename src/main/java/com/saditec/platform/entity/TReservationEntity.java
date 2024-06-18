@@ -1,5 +1,6 @@
 package com.saditec.platform.entity;
 
+import com.saditec.platform.type.TReservationDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,4 +33,18 @@ public class TReservationEntity extends TBaseEntity {
     @JoinColumn(name = "t_member_identifier")
     private TMemberEntity memberEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "t_educational_and_recreational_facility_identifier")
+    private TEducationalAndRecreationalFacilityEntity educationalAndRecreationalFacilityEntity;
+
+    public TReservationDto toDto() {
+        return TReservationDto.builder()
+                .identifier(getIdentifier())
+                .member(getMember())
+                .memberDescription(getMemberDescription())
+                .reservationDate(getReservationDate().toString())
+                .startTime(getStartTime())
+                .endTime(getEndTime())
+                .build();
+    }
 }

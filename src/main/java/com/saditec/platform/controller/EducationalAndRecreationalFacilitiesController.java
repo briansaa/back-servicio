@@ -3,6 +3,7 @@ package com.saditec.platform.controller;
 import com.saditec.platform.entity.TEducationalAndRecreationalFacilityEntity;
 import com.saditec.platform.service.EducationalAndRecreationalFacilitiesService;
 import com.saditec.platform.type.ApiResponse;
+import com.saditec.platform.type.TEducationalAndRecreationalFacilityDto;
 import com.saditec.platform.type.TEducationalAndRecreationalFacilityTypeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,15 +18,16 @@ public class EducationalAndRecreationalFacilitiesController {
 
     private final EducationalAndRecreationalFacilitiesService educationalAndRecreationalFacilitiesService;
 
-    @GetMapping
-    public TEducationalAndRecreationalFacilityEntity add() {
-        return educationalAndRecreationalFacilitiesService.add();
+    @GetMapping("/{identifier}")
+    public ApiResponse<TEducationalAndRecreationalFacilityDto> getEducationalAndRecreationalFacility(@PathVariable String identifier) {
+        return new ApiResponse<TEducationalAndRecreationalFacilityDto>()
+                .toSuccess(educationalAndRecreationalFacilitiesService.getEducationalAndRecreationalFacility(identifier));
     }
 
     @GetMapping("/type")
-    public ApiResponse<List<TEducationalAndRecreationalFacilityTypeDto>> getAllEducationalAndRecreationalFacility() {
+    public ApiResponse<List<TEducationalAndRecreationalFacilityTypeDto>> getAllEducationalAndRecreationalFacilityType() {
         return new ApiResponse<List<TEducationalAndRecreationalFacilityTypeDto>>()
-                .toSuccess(educationalAndRecreationalFacilitiesService.getAllEducationalAndRecreationalFacility());
+                .toSuccess(educationalAndRecreationalFacilitiesService.getAllEducationalAndRecreationalFacilityType());
     }
 
     @PostMapping("/type")
@@ -33,5 +35,11 @@ public class EducationalAndRecreationalFacilitiesController {
                                                                                                              Principal principal) {
         return new ApiResponse<TEducationalAndRecreationalFacilityTypeDto>()
                 .toSuccess(educationalAndRecreationalFacilitiesService.addEducationalAndRecreationalFacilityType(tEducationalAndRecreationalFacilityTypeDto, principal));
+    }
+
+    @GetMapping("/type/{identifier}")
+    public ApiResponse<List<TEducationalAndRecreationalFacilityDto>> getAllEducationalAndRecreationalFacility(@PathVariable String identifier) {
+        return new ApiResponse<List<TEducationalAndRecreationalFacilityDto>>()
+                .toSuccess(educationalAndRecreationalFacilitiesService.getAllEducationalAndRecreationalFacility(identifier));
     }
 }

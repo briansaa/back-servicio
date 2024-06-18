@@ -9,13 +9,8 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @Builder
-public class TReservationDto {
-
+public class TEducationalAndRecreationalHourDto {
     private String identifier;
-    private String member;
-    private String memberDescription;
-    private String reservationDate;
     private LocalTime startTime;
     private LocalTime endTime;
-
 }

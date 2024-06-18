@@ -18,4 +18,13 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
         apiResponse.setMessage(badRequestException.getMessage());
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({AppException.class})
+    protected ResponseEntity<Object> handleAppException(AppException appException) {
+        ApiResponse<Object> apiResponse = new ApiResponse<>();
+        apiResponse.setCode(appException.hashCode());
+        apiResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        apiResponse.setMessage(appException.getMessage());
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

@@ -27,7 +27,7 @@ public class TEducationalAndRecreationalFacilityTypeEntity extends TBaseEntity {
     @Column(name = "t_image_public", columnDefinition = "LONGTEXT")
     private String imagePublic;
 
-    @OneToMany(mappedBy = "type")
+    @OneToMany(mappedBy = "recreationalFacilityType")
     private Set<TEducationalAndRecreationalFacilityEntity> educationalAndRecreationalFacilities;
 
     public TEducationalAndRecreationalFacilityTypeDto toDto() {

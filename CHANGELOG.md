@@ -1,3 +1,7 @@
+#### [1.1.7] - 2024-06-18
+- Added dto for multiple entities
+- Added new endpoints to get data
+
 #### [1.1.6] - 2024-06-17
 - Updated JWTService, reference subject
 - Added entity TEducationalAndRecreationalPavilion
