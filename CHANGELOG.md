@@ -1,3 +1,6 @@
+#### [1.1.8] - 2024-06-19
+- Added create reservation endpoint complete
+
 #### [1.1.7] - 2024-06-18
 - Added dto for multiple entities
 - Added new endpoints to get data

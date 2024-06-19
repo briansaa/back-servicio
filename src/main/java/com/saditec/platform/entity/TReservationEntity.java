@@ -42,9 +42,22 @@ public class TReservationEntity extends TBaseEntity {
                 .identifier(getIdentifier())
                 .member(getMember())
                 .memberDescription(getMemberDescription())
+                .educationalAndRecreationalFacility(getEducationalAndRecreationalFacilityEntity().getIdentifier())
                 .reservationDate(getReservationDate().toString())
                 .startTime(getStartTime())
                 .endTime(getEndTime())
                 .build();
+    }
+
+    public static TReservationEntity toEntity(TReservationDto tReservationDto, TMemberEntity tMemberEntity, TEducationalAndRecreationalFacilityEntity educationalAndRecreationalFacilityEntity) {
+        TReservationEntity tReservationEntity = new TReservationEntity();
+        tReservationEntity.setMember(tMemberEntity.getIdentifier());
+        tReservationEntity.setMemberDescription(tMemberEntity.getFirstName().concat(" ").concat(tMemberEntity.getLastName()));
+        tReservationEntity.setReservationDate(Instant.parse(tReservationDto.getReservationDate()));
+        tReservationEntity.setStartTime(tReservationDto.getStartTime());
+        tReservationEntity.setEndTime(tReservationDto.getEndTime());
+        tReservationEntity.setMemberEntity(tMemberEntity);
+        tReservationEntity.setEducationalAndRecreationalFacilityEntity(educationalAndRecreationalFacilityEntity);
+        return tReservationEntity;
     }
 }

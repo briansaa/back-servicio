@@ -14,6 +14,7 @@ public class TReservationDto {
     private String identifier;
     private String member;
     private String memberDescription;
+    private String educationalAndRecreationalFacility;
     private String reservationDate;
     private LocalTime startTime;
     private LocalTime endTime;
