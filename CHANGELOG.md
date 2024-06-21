@@ -1,3 +1,6 @@
+#### [1.1.9] - 2024-06-19
+- Remove parameter pavilion from tEducationalAndRecreationalFacilityEntity
+
 #### [1.1.8] - 2024-06-19
 - Added create reservation endpoint complete
 

@@ -17,8 +17,8 @@ public class TEducationalAndRecreationalFacilityEntity extends TBaseEntity {
     @Column(name = "t_description")
     private String description;
 
-    @Column(name = "t_pavilion", columnDefinition = "VARCHAR(100)")
-    private String pavilion;
+    @Column(name = "t_location")
+    private String location;
 
     @ManyToOne
     @JoinColumn(name = "t_educational_and_recreational_facilities_type_identifier")
