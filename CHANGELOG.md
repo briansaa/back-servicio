@@ -1,5 +1,6 @@
 #### [1.1.10] - 2024-06-25
 - Added decorator for query and only get if enabled = true
+- Updated commit name to 1.0.1 to 1.1.10
 
 #### [1.1.9] - 2024-06-19
 - Remove parameter pavilion from tEducationalAndRecreationalFacilityEntity
