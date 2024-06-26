@@ -1,3 +1,6 @@
+#### [1.1.10] - 2024-06-25
+- Added decorator for query and only get if enabled = true
+
 #### [1.1.9] - 2024-06-19
 - Remove parameter pavilion from tEducationalAndRecreationalFacilityEntity
 

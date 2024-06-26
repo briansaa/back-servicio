@@ -4,6 +4,7 @@ import com.saditec.platform.type.TEducationalAndRecreationalFacilityDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.util.Collections;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "t_educational_and_recreational_facility")
+@SQLRestriction("b_enabled = 1")
 public class TEducationalAndRecreationalFacilityEntity extends TBaseEntity {
 
     @Column(name = "t_description")

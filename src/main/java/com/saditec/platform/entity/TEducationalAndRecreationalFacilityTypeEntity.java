@@ -4,6 +4,7 @@ import com.saditec.platform.type.TEducationalAndRecreationalFacilityTypeDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.Instant;
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "t_educational_and_recreational_facility_type")
+@SQLRestriction("b_enabled = 1")
 public class TEducationalAndRecreationalFacilityTypeEntity extends TBaseEntity {
 
     @Column(name = "t_name")

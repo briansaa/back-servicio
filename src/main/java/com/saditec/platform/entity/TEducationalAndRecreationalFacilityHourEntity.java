@@ -4,6 +4,7 @@ import com.saditec.platform.type.TEducationalAndRecreationalHourDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalTime;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "t_educational_and_recreational_facility_hour")
+@SQLRestriction("b_enabled = 1")
 public class TEducationalAndRecreationalFacilityHourEntity extends TBaseEntity {
 
     @Column(name = "lt_start_time")

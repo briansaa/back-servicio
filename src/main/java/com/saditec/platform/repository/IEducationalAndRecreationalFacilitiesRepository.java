@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface IEducationalAndRecreationalFacilitiesRepository extends JpaRepository<TEducationalAndRecreationalFacilityEntity, String> {
 
     @Query("SELECT DISTINCT u FROM TEducationalAndRecreationalFacilityEntity u " +
-            "WHERE u.recreationalFacilityType.identifier = :identifier ")
+            "WHERE u.recreationalFacilityType.identifier = :identifier")
     List<TEducationalAndRecreationalFacilityEntity> findByTEducationalType(String identifier);
 
     @Query("SELECT DISTINCT u FROM TEducationalAndRecreationalFacilityEntity u " +
