@@ -23,7 +23,7 @@ services:
       DB_URL: jdbc:mysql://db:3306/tec_saditec?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
       DB_USERNAME: root
       DB_PASSWORD: ${DB_PASSWORD:-saditec}
-      JWT_SECRET: ${JWT_SECRET:-ZGV2LW9ubHktc2FkaXRlYy1qd3Qtc2VjcmV0LWNoYW5nZS1tZS1pbi1wcm9kdWN0aW9uLTEyMzQ1Ng==}
+      JWT_SECRET: ${JWT_SECRET:-ZGV2LW9ubHktc2FkaXRlYy1qd3Qtc2VjcmV0LWNoYW5nZS1tZS1pbi1wcm9kLTAx}
       CORS_ALLOWED_ORIGINS: http://localhost:3000
     ports:
       - "10000:10000"
