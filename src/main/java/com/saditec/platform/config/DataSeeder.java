@@ -17,7 +17,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.core.io.ClassPathResource;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.Instant;
+import java.util.Base64;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
@@ -66,21 +71,24 @@ public class DataSeeder implements ApplicationRunner {
                 hour(8, 10), hour(10, 12), hour(14, 16), hour(16, 18)
         );
 
-        createType("Laboratorios", "Laboratorios de cómputo y ciencias para prácticas.",
+        createType("Laboratorios", "Laboratorios de cómputo y ciencias para prácticas.", "laboratorios",
                 List.of("Laboratorio de Cómputo 101", "Laboratorio de Redes 204"), "Pabellón A", hours);
-        createType("Polideportivo", "Canchas y espacios deportivos del campus.",
+        createType("Polideportivo", "Canchas y espacios deportivos del campus.", "polideportivo",
                 List.of("Cancha de Fútbol", "Cancha de Vóley"), "Polideportivo", hours);
-        createType("Auditorios", "Espacios para charlas, exposiciones y eventos.",
+        createType("Auditorios", "Espacios para charlas, exposiciones y eventos.", "auditorios",
                 List.of("Auditorio Principal"), "Pabellón C", hours);
 
         log.info("Datos de ejemplo cargados: tipos, espacios y horarios");
     }
 
-    private void createType(String name, String description, List<String> facilities, String location,
+    private void createType(String name, String description, String imageName, List<String> facilities, String location,
                             List<TEducationalAndRecreationalFacilityHourEntity> hours) {
         TEducationalAndRecreationalFacilityTypeEntity type = new TEducationalAndRecreationalFacilityTypeEntity();
         type.setName(name);
         type.setDescription(description);
+        String image = loadImage(imageName);
+        type.setImage(image);
+        type.setImagePublic(image);
         stamp(type);
         type = typeRepository.save(type);
 
@@ -99,6 +107,16 @@ public class DataSeeder implements ApplicationRunner {
             }
         }
         hours.forEach(entityManager::merge);
+    }
+
+    /** Lee una imagen PNG de resources/seed y la devuelve en Base64 (formato que espera el frontend). */
+    private String loadImage(String name) {
+        try (InputStream in = new ClassPathResource("seed/" + name + ".png").getInputStream()) {
+            return Base64.getEncoder().encodeToString(in.readAllBytes());
+        } catch (IOException e) {
+            log.warn("No se pudo cargar la imagen de ejemplo {}", name);
+            return null;
+        }
     }
 
     private TEducationalAndRecreationalFacilityHourEntity hour(int start, int end) {
