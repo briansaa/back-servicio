@@ -1,3 +1,11 @@
+#### [1.2.0] - 2026-11-02
+- Validación de reservas: hora fin > hora inicio, fecha ISO-8601 y sin cruces en el mismo espacio y día
+- DataSeeder: roles, tipos de espacio, espacios y horarios de ejemplo en el perfil local
+- Credenciales y clave JWT por variables de entorno (la clave anterior ya no está en el repo)
+- CORS configurable para el frontend
+- Transacciones de solo lectura en consultas (corrige LazyInitializationException)
+- Java 21 LTS, tests con H2 y Mockito, Dockerfile, docker-compose y CI en GitHub Actions
+
 #### [1.1.10] - 2024-06-25
 - Added decorator for query and only get if enabled = true
 - Updated commit name to 1.0.1 to 1.1.10

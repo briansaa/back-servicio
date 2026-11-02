@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: tec_saditec
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-saditec}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 20
+
+  api:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      DB_URL: jdbc:mysql://db:3306/tec_saditec?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD:-saditec}
+      JWT_SECRET: ${JWT_SECRET:-ZGV2LW9ubHktc2FkaXRlYy1qd3Qtc2VjcmV0LWNoYW5nZS1tZS1pbi1wcm9kLTAx}
+      CORS_ALLOWED_ORIGINS: http://localhost:3000
+    ports:
+      - "10000:10000"
+
+volumes:
+  db-data:
