@@ -23,6 +23,7 @@ public class EducationalAndRecreationalFacilitiesService {
     private final IEducationalAndRecreationalFacilitiesRepository educationalAndRecreationalFacilitiesRepository;
     private final IEducationalAndRecreationalFacilitiesTypeRepository educationalAndRecreationalFacilitiesTypeRepository;
 
+    @Transactional(readOnly = true)
     public TEducationalAndRecreationalFacilityDto getEducationalAndRecreationalFacility(String identifier) {
         Optional<TEducationalAndRecreationalFacilityEntity> educationalAndRecreationalFacilityEntity = educationalAndRecreationalFacilitiesRepository.findByIdentifier(identifier);
 
@@ -31,11 +32,13 @@ public class EducationalAndRecreationalFacilitiesService {
         return educationalAndRecreationalFacilityEntity.get().toDto();
     }
 
+    @Transactional(readOnly = true)
     public List<TEducationalAndRecreationalFacilityDto> getAllEducationalAndRecreationalFacility(String identifier) {
         List<TEducationalAndRecreationalFacilityEntity> educationalAndRecreationalFacilityEntity = educationalAndRecreationalFacilitiesRepository.findByTEducationalType(identifier);
         return educationalAndRecreationalFacilityEntity.stream().map(TEducationalAndRecreationalFacilityEntity::toDto).toList();
     }
 
+    @Transactional(readOnly = true)
     public List<TEducationalAndRecreationalFacilityTypeDto> getAllEducationalAndRecreationalFacilityType() {
         List<TEducationalAndRecreationalFacilityTypeEntity> educationalAndRecreationalFacilityEntityList = educationalAndRecreationalFacilitiesTypeRepository.findAll();
         return educationalAndRecreationalFacilityEntityList.stream().map(TEducationalAndRecreationalFacilityTypeEntity::toDto).toList();
